@@ -5,6 +5,10 @@ import com.example.jpa.dao.StudentRepository;
 import com.example.jpa.service.StudentService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.example.jpa.bean.Student;
@@ -13,9 +17,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+
 @RestController//控制返回的格式，写入Http响应头
 @RequestMapping("/students")
 public class StudentController {
+    private static final int PAGE_SIZE = 4;
     @Autowired
     StudentService studentService;
     @Autowired
@@ -54,6 +60,11 @@ public class StudentController {
         return studentService.delete(id);
     }
 
-
+    @GetMapping(value = "/student/page/{pageNo}")
+    public Page<Student> getStudentWithPage(@PathVariable int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
+        return studentRepository.findAll(pageable);
+    }
+    
 }
 
