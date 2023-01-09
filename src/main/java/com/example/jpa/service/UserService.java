@@ -2,47 +2,41 @@ package com.example.jpa.service;
 
 import com.example.jpa.bean.User;
 import com.example.jpa.dao.UserRepository;
+import com.example.jpa.request.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@Service("userService")
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class UserService {
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
-    public User getUserByID(Long id){
-        return userRepository.findById(id).get();
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
-    public User getByName(String name){
-        return userRepository.findByName(name);
+    public ResponseEntity<?> login(LoginRequest loginRequest)
+    {
+        if(userRepository.existsByUsername(loginRequest.getUsername()))
+        {
+            User user=userRepository.findByUsername(loginRequest.getUsername()).get();
+            if(user.getPassword().equals(loginRequest.getPassword()))
+                return ResponseEntity
+                        .ok("Success");
+            else
+                return ResponseEntity
+                        .badRequest()
+                        .body("Error: Password is wrong!");
+        }
+        else
+        {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: Username is not exist!");
+        }
     }
-
-    public Page<User> findPage(){
-        Pageable pageable = PageRequest.of(0, 10);
-        return userRepository.findAll(pageable);
-    }
-
-    public Page<User> find(Long maxId){
-        Pageable pageable = PageRequest.of(0, 10);
-        return userRepository.findMore(maxId,pageable);
-    }
-
-    public User save(User u){
-        return userRepository.save(u);
-    }
-
-    public User update(Long id,String name){
-        User user = userRepository.findById(id).get();
-        user.setName(name+"_update");
-        return userRepository.save(user);
-    }
-
-    public Boolean updateById(String  name, Long id){
-        return userRepository.updateById(name,id)==1;
-    }
-
 }
