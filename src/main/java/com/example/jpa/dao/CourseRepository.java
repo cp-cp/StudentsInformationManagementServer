@@ -12,11 +12,10 @@ import java.util.Optional;
 public interface CourseRepository extends JpaRepository<Course,Integer> {
     @Query("select c from Course c where c.teacher.id = ?1")
     List<Course> findByTeacherId(int id);
-   // @Query("select c from Course c where c.credit = ?1")
-    List<Course> findByCredit(int id);
+    @Query("select c from Course c where c.credit = ?1")
+    List<Course> findByCredit(int credit);
 
     @Query("select c from Course c where c.id = ?1")
     Optional<Course> findById(int id);
-    //@Query("select c from Course c where c.teacher.id = ?1")
-     long deleteByTeacherId(int id);
+    long deleteByTeacherId(int id);
 }

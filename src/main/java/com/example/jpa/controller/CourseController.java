@@ -11,38 +11,37 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/courses")
-public class CourseController
-{
+public class CourseController {
     @Autowired
     CourseService courseService;
     @Autowired
     private TeacherRepository teacherRepository;
 
     @GetMapping("/init")
-     String init()
-    {
+    String init() {
         return courseService.init();
     }
 
-    @PostMapping("/findById")
-    Optional<Course> findById(@RequestBody int id)
-    {
-        return courseService.findById(id);
+    @GetMapping("/all")
+    List<Course> findAll() { return courseService.findAll(); }
+
+    @GetMapping("/getById")
+    Optional<Course> findById(@RequestBody int id) {
+        return courseService.getById(id);
     }
+
     @PostMapping("/findByTeacherId")
-    List<Course> findByTeacherId(@RequestBody int teacherId)
-    {
+    List<Course> findByTeacherId(@RequestBody int teacherId) {
         return courseService.findByTeacherId(teacherId);
     }
+
     @PostMapping("/findByCredit")
-    List<Course> findByCredit(@RequestBody int credit)
-    {
+    List<Course> findByCredit(@RequestBody int credit) {
         return courseService.findByCredit(credit);
     }
 
     @DeleteMapping("/deleteByTeacherId/{id}")
-    String deleteByTeacherId(@PathVariable int id)
-    {
+    String deleteByTeacherId(@PathVariable int id) {
         return courseService.deleteByTeacherId(id);
     }
 

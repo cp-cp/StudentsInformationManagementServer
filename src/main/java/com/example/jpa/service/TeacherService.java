@@ -23,18 +23,17 @@ public class TeacherService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public String init()
-    {
-        String[] name={"Alice", "Bob", "Charlie", "David", "Emily", "Frank", "Grace", "Henry", "Isabella", "John"};
-        String[] college={"Accountant", "Architect", "Engineer", "Lawyer", "Doctor", "Dentist", "Veterinarian", "Psychologist", "Developer", "Designer"};
-        for(int i=0;i<10;i++)
-        {
-            Teacher teacher=new Teacher();
+    public String init() {
+        String[] name = {"Alice", "Bob", "Charlie", "David", "Emily",
+                "Frank", "Grace", "Henry", "Isabella", "John"};
+        String[] college = {"Accountant", "Architect", "Engineer", "Lawyer", "Doctor", "Dentist", "Veterinarian", "Psychologist", "Developer", "Designer"};
+        for (int i = 0; i < 10; i++) {
+            Teacher teacher = new Teacher();
             teacher.setName(name[i]);
             teacher.setCollege(college[i]);
             teacherRepository.save(teacher);
         }
-        return "成功生成样例数据";
+        return "initialize teachers successfully!";
     }
 
     public List<Teacher> findAll() {
@@ -45,35 +44,28 @@ public class TeacherService {
         return teacherRepository.findById(id);
     }
 
-    public String add(Teacher Teacher)
-    {
+    public String add(Teacher Teacher) {
         return null;
     }
 
-    public String delete(int id)
-    {
-        if(teacherRepository.existsById(id))
-        {
+    public String delete(int id) {
+        if (teacherRepository.existsById(id)) {
             teacherRepository.deleteById(id);
             courseRepository.deleteByTeacherId(id);
             return "成功删除!";
-        }
-        else
-        {
+        } else {
             courseRepository.deleteByTeacherId(id);
             return "不存在这个序号的人";
         }
 
     }
 
-    public Optional<Teacher> getById(int id)
-    {
+    public Optional<Teacher> getById(int id) {
         return teacherRepository.findById(id);
     }
 
-    public List<Course> AllCourses(int id)
-    {
-        List<Course> courses=courseRepository.findByTeacherId(id);
+    public List<Course> AllCourses(int id) {
+        List<Course> courses = courseRepository.findByTeacherId(id);
         return courses;
     }
 }
