@@ -1,9 +1,15 @@
 package com.example.jpa.controller;
 
 import com.example.jpa.bean.Course;
+import com.example.jpa.bean.Student;
 import com.example.jpa.bean.Teacher;
+import com.example.jpa.dao.StudentRepository;
+import com.example.jpa.dao.TeacherRepository;
 import com.example.jpa.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +20,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/teachers")
 public class TeacherController {
+    private static final int PAGE_SIZE = 4;
     @Autowired
     TeacherService teacherService;
+
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     @GetMapping("/init")
     String init() {
@@ -64,5 +74,11 @@ public class TeacherController {
     @DeleteMapping("/deleteById/{id}")
     String delete(@PathVariable int id) {
         return teacherService.delete(id);
+    }
+
+    @GetMapping(value = "teacher/page/{pageNo}")
+    public Page<Teacher> getStudentWithPage(@PathVariable int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
+        return teacherRepository.findAll(pageable);
     }
 }

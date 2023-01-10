@@ -60,11 +60,10 @@ public class StudentController {
         return studentService.delete(id);
     }
 
-    @GetMapping(value = "/student/page/{pageNo}")
+    @GetMapping(value = "student/page/{pageNo}")
     public Page<Student> getStudentWithPage(@PathVariable int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
         return studentRepository.findAll(pageable);
     }
-    
 }
 
