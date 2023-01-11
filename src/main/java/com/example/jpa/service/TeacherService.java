@@ -6,6 +6,8 @@ import com.example.jpa.bean.Teacher;
 import com.example.jpa.dao.CourseRepository;
 import com.example.jpa.dao.StudentRepository;
 import com.example.jpa.dao.TeacherRepository;
+import com.example.jpa.request.InsertTeacherRequest;
+import com.example.jpa.request.ModifyTeacherRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,8 +51,14 @@ public class TeacherService {
         return teacherRepository.findById(id);
     }
 
-    public String add(Teacher Teacher) {
-        return null;
+    public String add(InsertTeacherRequest teacherRequest) {
+        Teacher teacher=new Teacher();
+        teacher.setCollege(teacherRequest.getCollege());
+        teacher.setName(teacherRequest.getName());
+        teacher.setGender(teacherRequest.getGender());
+        teacher.setNumber(teacherRequest.getNumber());
+        teacherRepository.save(teacher);
+        return "Success";
     }
 
     public String delete(int id) {
@@ -72,5 +80,16 @@ public class TeacherService {
     public List<Course> AllCourses(int id) {
         List<Course> courses = courseRepository.findByTeacherId(id);
         return courses;
+    }
+
+    public  String modify(ModifyTeacherRequest teacherRequest)
+    {
+        Teacher teacher=teacherRepository.findByNumber(teacherRequest.getNumber()).get();
+        teacher.setNumber(teacherRequest.getNumber());
+        teacher.setGender(teacherRequest.getGender());
+        teacher.setName(teacherRequest.getName());
+        teacher.setCollege(teacherRequest.getCollege());
+        teacherRepository.save(teacher);
+        return "Success";
     }
 }

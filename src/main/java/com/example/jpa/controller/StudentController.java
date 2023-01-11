@@ -2,20 +2,18 @@ package com.example.jpa.controller;
 
 
 import com.example.jpa.dao.StudentRepository;
+import com.example.jpa.request.InsertStudentRequest;
 import com.example.jpa.service.StudentService;
-import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.example.jpa.bean.Student;
+import com.example.jpa.request.ModifyStudentRequest;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 
 @RestController//控制返回的格式，写入Http响应头
@@ -50,7 +48,7 @@ public class StudentController {
 
     //增添
     @PostMapping("/add")
-    String add(@RequestBody Student student) {
+    String add(@RequestBody InsertStudentRequest student) {
         return studentService.add(student);
     }
 
@@ -64,6 +62,11 @@ public class StudentController {
     public Page<Student> getStudentWithPage(@PathVariable int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
         return studentRepository.findAll(pageable);
+    }
+    @PostMapping("/modify")
+    String modify(@RequestBody ModifyStudentRequest studentRequest)
+    {
+        return studentService.modify(studentRequest);
     }
 }
 
