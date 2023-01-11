@@ -14,12 +14,12 @@ http://localhost:8080
 #### class
 
 | **element** | type    |
-| ----------- | ------- |
+| ----------- |---------|
 | id          | Integer |
-| number      | Integer |
-| gender      | Integer |
+| number      | String  |
+| gender      | String  |
 | name        | String  |
-| college     | Integer |
+| college     | String  |
 | score       | Integer |
 
 #### http
@@ -40,10 +40,12 @@ http://localhost:8080
 #### class
 
 | element | type    |
-| ------- | ------- |
+|---------|---------|
 | id      | Integer |
 | name    | String  |
 | college | String  |
+| gender  | String  |
+| number  | String  |
 
 #### http
 
@@ -65,10 +67,11 @@ http://localhost:8080
 #### class
 
 | element    | type    |
-| ---------- | ------- |
-| courseId   | Integer |
+|------------|---------|
+| id         | Integer |
 | courseName | String  |
 | credit     | Integer |
+| number     | String  |
 
 #### http
 
