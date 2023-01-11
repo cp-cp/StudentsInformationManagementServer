@@ -23,8 +23,10 @@ public class StudentService {
             Student student = new Student();
             student.setName(name[i]);
             student.setCollege(college[i]);
-            student.setGender(random.nextInt(2));
-            student.setNumber(random.nextInt(10000) + 20210000);
+            if(random.nextInt(2)==1)student.setGender("男");
+            else student.setGender("女");
+            Integer number=random.nextInt(10000) + 0120210000;
+            student.setNumber(number.toString());
             studentRepository.save(student);
         }
         return "initialize students successfully!";

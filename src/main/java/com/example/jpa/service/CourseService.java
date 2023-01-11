@@ -26,6 +26,8 @@ public class CourseService {
             Course course = new Course();
             course.setName(name[i]);
             course.setCredit(random.nextInt(10));
+            Integer number=random.nextInt(10000) + 0320210000;
+            course.setNumber(number.toString());
             course.setTeacher(teacherRepository.getById(random.nextInt(9) + 1));
             courseRepository.save(course);
         }

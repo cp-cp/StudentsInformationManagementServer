@@ -17,4 +17,6 @@ public class Teacher
      int id;
      String name;
      String college;
+     String gender;
+     String number;
 }

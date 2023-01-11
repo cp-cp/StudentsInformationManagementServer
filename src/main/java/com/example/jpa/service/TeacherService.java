@@ -24,6 +24,7 @@ public class TeacherService {
     private StudentRepository studentRepository;
 
     public String init() {
+        Random random=new Random();
         String[] name = {"Alice", "Bob", "Charlie", "David", "Emily",
                 "Frank", "Grace", "Henry", "Isabella", "John"};
         String[] college = {"Accountant", "Architect", "Engineer", "Lawyer", "Doctor", "Dentist", "Veterinarian", "Psychologist", "Developer", "Designer"};
@@ -31,6 +32,10 @@ public class TeacherService {
             Teacher teacher = new Teacher();
             teacher.setName(name[i]);
             teacher.setCollege(college[i]);
+            if(random.nextInt(2)==1)teacher.setGender("男");
+            else teacher.setGender("女");
+            Integer number=random.nextInt(10000) + 0220210000;
+            teacher.setNumber(number.toString());
             teacherRepository.save(teacher);
         }
         return "initialize teachers successfully!";
