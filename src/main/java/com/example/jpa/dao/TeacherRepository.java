@@ -15,4 +15,5 @@ import java.util.Optional;
 public interface TeacherRepository extends JpaRepository<Teacher,Integer> {
     Page<Teacher> findAll(Pageable pageable);
     Optional<Teacher> findByNumber(String number);
+    boolean existsByNumber(String number);
 }

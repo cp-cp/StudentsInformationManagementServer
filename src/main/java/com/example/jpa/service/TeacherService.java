@@ -9,6 +9,7 @@ import com.example.jpa.dao.TeacherRepository;
 import com.example.jpa.request.InsertTeacherRequest;
 import com.example.jpa.request.ModifyTeacherRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,14 +52,23 @@ public class TeacherService {
         return teacherRepository.findById(id);
     }
 
-    public String add(InsertTeacherRequest teacherRequest) {
-        Teacher teacher=new Teacher();
-        teacher.setCollege(teacherRequest.getCollege());
-        teacher.setName(teacherRequest.getName());
-        teacher.setGender(teacherRequest.getGender());
-        teacher.setNumber(teacherRequest.getNumber());
-        teacherRepository.save(teacher);
-        return "Success";
+    public ResponseEntity add(InsertTeacherRequest teacherRequest) {
+        if(teacherRepository.existsByNumber(teacherRequest.getNumber()))
+        {
+            Teacher teacher=new Teacher();
+            teacher.setCollege(teacherRequest.getCollege());
+            teacher.setName(teacherRequest.getName());
+            teacher.setGender(teacherRequest.getGender());
+            teacher.setNumber(teacherRequest.getNumber());
+            teacherRepository.save(teacher);
+            return ResponseEntity.ok("Success!");
+        }
+        else
+        {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: The teacher has been existed!");
+        }
     }
 
     public String delete(int id) {
@@ -82,14 +92,23 @@ public class TeacherService {
         return courses;
     }
 
-    public  String modify(ModifyTeacherRequest teacherRequest)
+    public ResponseEntity modify(ModifyTeacherRequest teacherRequest)
     {
-        Teacher teacher=teacherRepository.findByNumber(teacherRequest.getNumber()).get();
-        teacher.setNumber(teacherRequest.getNumber());
-        teacher.setGender(teacherRequest.getGender());
-        teacher.setName(teacherRequest.getName());
-        teacher.setCollege(teacherRequest.getCollege());
-        teacherRepository.save(teacher);
-        return "Success";
+        if(teacherRepository.existsByNumber(teacherRequest.getNumber()))
+        {
+            Teacher teacher=teacherRepository.findByNumber(teacherRequest.getNumber()).get();
+            teacher.setNumber(teacherRequest.getNumber());
+            teacher.setGender(teacherRequest.getGender());
+            teacher.setName(teacherRequest.getName());
+            teacher.setCollege(teacherRequest.getCollege());
+            teacherRepository.save(teacher);
+            return ResponseEntity.ok("Success!");
+        }
+        else
+        {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: No teacher match the number!");
+        }
     }
 }

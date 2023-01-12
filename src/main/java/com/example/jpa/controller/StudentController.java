@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.jpa.bean.Student;
 import com.example.jpa.request.ModifyStudentRequest;
@@ -48,7 +49,7 @@ public class StudentController {
 
     //增添
     @PostMapping("/add")
-    String add(@RequestBody InsertStudentRequest student) {
+    ResponseEntity add(@RequestBody InsertStudentRequest student) {
         return studentService.add(student);
     }
 
@@ -64,7 +65,7 @@ public class StudentController {
         return studentRepository.findAll(pageable);
     }
     @PostMapping("/modify")
-    String modify(@RequestBody ModifyStudentRequest studentRequest)
+    ResponseEntity modify(@RequestBody ModifyStudentRequest studentRequest)
     {
         return studentService.modify(studentRequest);
     }

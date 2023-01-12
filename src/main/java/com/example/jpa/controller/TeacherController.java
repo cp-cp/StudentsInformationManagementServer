@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,7 +69,7 @@ public class TeacherController {
 
     //增添
     @PostMapping("/add")
-    String add(@RequestBody InsertTeacherRequest Teacher) {
+    ResponseEntity add(@RequestBody InsertTeacherRequest Teacher) {
         return teacherService.add(Teacher);
     }
 
@@ -84,5 +85,5 @@ public class TeacherController {
         return teacherRepository.findAll(pageable);
     }
     @PostMapping("/modify")
-    String modify(@RequestBody ModifyTeacherRequest teacherRequest){return  teacherService.modify(teacherRequest);}
+    ResponseEntity modify(@RequestBody ModifyTeacherRequest teacherRequest){return  teacherService.modify(teacherRequest);}
 }

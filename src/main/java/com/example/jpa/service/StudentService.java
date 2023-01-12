@@ -5,6 +5,7 @@ import com.example.jpa.dao.StudentRepository;
 import com.example.jpa.request.InsertStudentRequest;
 import com.example.jpa.request.ModifyStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,18 +43,22 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
-    public String add(InsertStudentRequest student) {
+    public ResponseEntity add(InsertStudentRequest student) {
         if (studentRepository.existsByNumber(student.getNumber()))
-            return "It has been repeated.";
+        {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: The username has been registered!");
+        }
         else {
             Student student1=new Student();
             student1.setGender(student.getGender());
             student1.setCollege(student.getCollege());
             student1.setNumber(student.getNumber());
             student1.setName(student.getName());
-            student1.setScore(student1.getScore());
+            student1.setScore(student.getScore());
             studentRepository.save(student1);
-            return "Add " + student + " successfully!";
+            return ResponseEntity.ok("success");
         }
     }
 
@@ -70,15 +75,24 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
-    public String modify(ModifyStudentRequest studentRequest)
+    public ResponseEntity modify(ModifyStudentRequest studentRequest)
     {
-        Student student=studentRepository.findByNumber(studentRequest.getNumber()).get();
-        student.setScore(studentRequest.getScore());
-        student.setGender(studentRequest.getGender());
-        student.setCollege(studentRequest.getCollege());
-        student.setNumber(studentRequest.getNumber());
-        student.setName(studentRequest.getName());
-        studentRepository.save(student);
-        return "Success";
+        if(studentRepository.existsByNumber(studentRequest.getNumber()))
+        {
+            Student student=studentRepository.findByNumber(studentRequest.getNumber()).get();
+            student.setScore(studentRequest.getScore());
+            student.setGender(studentRequest.getGender());
+            student.setCollege(studentRequest.getCollege());
+            student.setNumber(studentRequest.getNumber());
+            student.setName(studentRequest.getName());
+            studentRepository.save(student);
+            return ResponseEntity.ok("Success");
+        }
+        else
+        {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error:  No student match the number");
+        }
     }
 }
