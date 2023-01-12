@@ -21,6 +21,6 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
 
     @Query("select c from Course c where c.id = ?1")
     Optional<Course> findById(int id);
-    long deleteByTeacherId(int id);
+    long deleteByTeacherNumber(String id);
 
 }

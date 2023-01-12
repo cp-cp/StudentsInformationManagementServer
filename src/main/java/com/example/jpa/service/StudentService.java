@@ -62,12 +62,14 @@ public class StudentService {
         }
     }
 
-    public String delete(int id) {
-        if (studentRepository.existsById(id)) {
-            studentRepository.deleteById(id);
-            return "Delete " + id + " successfully!";
+    public ResponseEntity delete(String id) {
+        if (studentRepository.existsByNumber(id)) {
+            studentRepository.deleteByNumber(id);
+            return ResponseEntity
+                    .badRequest()
+                    .body("Delete " + id + " successfully!");
         } else {
-            return "Unable to find this id.";
+            return ResponseEntity.ok("Unable to find this id.");
         }
     }
 

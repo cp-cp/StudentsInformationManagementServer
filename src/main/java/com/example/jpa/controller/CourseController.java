@@ -47,9 +47,9 @@ public class CourseController {
         return courseService.findByCredit(credit);
     }
 
-    @DeleteMapping("/deleteByTeacherId/{id}")
-    String deleteByTeacherId(@PathVariable int id) {
-        return courseService.deleteByTeacherId(id);
+    @DeleteMapping("/deleteByTeacherNumber/{number}")
+    String deleteByTeacherNumber(@PathVariable String number) {
+        return courseService.deleteByTeacherNumber(number);
     }
 
     @GetMapping(value = "course/page/{pageNo}")

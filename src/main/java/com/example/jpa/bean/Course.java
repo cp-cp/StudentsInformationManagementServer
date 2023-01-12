@@ -19,6 +19,6 @@ public class Course
      int credit;
      String number;
     @ManyToOne
-    @JoinColumn(name="teacherId")
+    @JoinColumn(name="teachNumber")
     private Teacher teacher;
 }

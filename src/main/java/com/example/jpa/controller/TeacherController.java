@@ -75,8 +75,8 @@ public class TeacherController {
 
     //删除
     @DeleteMapping("/deleteById/{id}")
-    String delete(@PathVariable int id) {
-        return teacherService.delete(id);
+    ResponseEntity delete(@PathVariable String number) {
+        return teacherService.delete(number);
     }
 
     @GetMapping(value = "teacher/page/{pageNo}")

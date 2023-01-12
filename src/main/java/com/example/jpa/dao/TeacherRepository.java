@@ -16,4 +16,5 @@ public interface TeacherRepository extends JpaRepository<Teacher,Integer> {
     Page<Teacher> findAll(Pageable pageable);
     Optional<Teacher> findByNumber(String number);
     boolean existsByNumber(String number);
+    long deleteByNumber(String number);
 }

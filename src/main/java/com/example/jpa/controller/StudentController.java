@@ -54,9 +54,9 @@ public class StudentController {
     }
 
     //删除
-    @DeleteMapping("/deleteById/{id}")
-    String delete(@PathVariable int id) {
-        return studentService.delete(id);
+    @DeleteMapping("/deleteByNumber/{number}")
+    ResponseEntity delete(@PathVariable String number) {
+        return studentService.delete(number);
     }
 
     @GetMapping(value = "student/page/{pageNo}")

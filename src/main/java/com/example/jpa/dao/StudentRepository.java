@@ -17,4 +17,5 @@ public interface StudentRepository extends PagingAndSortingRepository<Student,In
     boolean existsById(int id);
     boolean existsByNumber(String Number);
     Optional<Student> findByNumber(String number);
+    long deleteByNumber(String number);
 }

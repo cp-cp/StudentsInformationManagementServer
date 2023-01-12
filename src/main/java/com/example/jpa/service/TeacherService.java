@@ -71,14 +71,15 @@ public class TeacherService {
         }
     }
 
-    public String delete(int id) {
-        if (teacherRepository.existsById(id)) {
-            teacherRepository.deleteById(id);
-            courseRepository.deleteByTeacherId(id);
-            return "成功删除!";
+    public ResponseEntity delete(String number) {
+        if (teacherRepository.existsByNumber(number)) {
+            teacherRepository.deleteByNumber(number);
+            courseRepository.deleteByTeacherNumber(number);
+            return ResponseEntity.ok("Success!");
         } else {
-            courseRepository.deleteByTeacherId(id);
-            return "不存在这个序号的人";
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: No match!");
         }
 
     }

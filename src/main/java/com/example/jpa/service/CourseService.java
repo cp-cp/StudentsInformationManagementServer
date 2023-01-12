@@ -47,7 +47,7 @@ public class CourseService {
         return courseRepository.findByCredit(credit);
     }
 
-    public String deleteByTeacherId(int id) {
-        return "Delete " + courseRepository.deleteByTeacherId(id) + " successfully!";
+    public String deleteByTeacherNumber(String number) {
+        return "Delete " + courseRepository.deleteByTeacherNumber(number) + " successfully!";
     }
 }
