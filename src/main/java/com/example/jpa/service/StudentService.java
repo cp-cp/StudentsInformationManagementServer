@@ -48,7 +48,7 @@ public class StudentService {
         {
             return ResponseEntity
                     .badRequest()
-                    .body("Error: The username has been registered!");
+                    .body("Error: The teacher has been existed!");
         }
         else {
             Student student1=new Student();
