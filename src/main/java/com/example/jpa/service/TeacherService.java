@@ -55,6 +55,12 @@ public class TeacherService {
     public ResponseEntity add(InsertTeacherRequest teacherRequest) {
         if(teacherRepository.existsByNumber(teacherRequest.getNumber()))
         {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: The teacher has been existed!");
+        }
+        else
+        {
             Teacher teacher=new Teacher();
             teacher.setCollege(teacherRequest.getCollege());
             teacher.setName(teacherRequest.getName());
@@ -62,12 +68,6 @@ public class TeacherService {
             teacher.setNumber(teacherRequest.getNumber());
             teacherRepository.save(teacher);
             return ResponseEntity.ok("Success!");
-        }
-        else
-        {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Error: The teacher has been existed!");
         }
     }
 
@@ -81,7 +81,6 @@ public class TeacherService {
                     .badRequest()
                     .body("Error: No match!");
         }
-
     }
 
     public Optional<Teacher> getById(int id) {

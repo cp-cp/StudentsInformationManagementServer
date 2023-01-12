@@ -18,8 +18,7 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public String init() {
-        String[] name = {"John", "Jane", "Mark", "Mia",
-                "David", "Emily", "Michael", "Sarah", "Peter", "Elizabeth"};
+        String[] name = {"John", "Jane", "Mark", "Mia", "David", "Emily", "Michael", "Sarah", "Peter", "Elizabeth"};
         String[] college = {"Accountant", "Architect", "Engineer", "Lawyer", "Doctor", "Dentist", "Veterinarian", "Psychologist", "Developer", "Designer"};
         for (int i = 0; i < 10; i++) {
             Random random = new Random();
@@ -62,12 +61,12 @@ public class StudentService {
         }
     }
 
-    public ResponseEntity delete(String id) {
-        if (studentRepository.existsByNumber(id)) {
-            studentRepository.deleteByNumber(id);
+    public ResponseEntity delete(String number) {
+        if (studentRepository.existsByNumber(number)) {
+            studentRepository.deleteByNumber(number);
             return ResponseEntity
                     .badRequest()
-                    .body("Delete " + id + " successfully!");
+                    .body("Delete " + number + " successfully!");
         } else {
             return ResponseEntity.ok("Unable to find this id.");
         }
