@@ -72,6 +72,7 @@ http://localhost:8080
 | courseName | String  |
 | credit     | Integer |
 | number     | String  |
+|teacher | Teacher|
 
 #### http
 
