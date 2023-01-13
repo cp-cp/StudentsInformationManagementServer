@@ -10,13 +10,12 @@ import javax.persistence.*;
 @NoArgsConstructor//无参构造
 @Entity//指定实体类
 @Table(name = "teacher")//指定表名
-public class Teacher
-{
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
-     String name;
-     String college;
-     String gender;
-     String number;
+    int id;
+    String name;
+    String college;
+    String gender;
+    String number;
 }

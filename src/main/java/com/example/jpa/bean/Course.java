@@ -10,15 +10,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "Course")
-public class Course
-{
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     int id;
-     String name;
-     int credit;
-     String number;
+    int id;
+    String name;
+    int credit;
+    String number;
     @ManyToOne
-    @JoinColumn(name="teachNumber")
+    @JoinColumn(name = "teachNumber")
     private Teacher teacher;
 }

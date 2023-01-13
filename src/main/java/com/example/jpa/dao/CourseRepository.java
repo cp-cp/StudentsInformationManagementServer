@@ -23,4 +23,6 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
     Optional<Course> findById(int id);
     long deleteByTeacherNumber(String id);
 
+    boolean existsByNumber(String Number);
+    long deleteByNumber(String number);
 }

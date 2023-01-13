@@ -75,7 +75,7 @@ public class TeacherService {
         if (teacherRepository.existsByNumber(number)) {
             teacherRepository.deleteByNumber(number);
             courseRepository.deleteByTeacherNumber(number);
-            return ResponseEntity.ok("Success!");
+            return ResponseEntity.ok().body("Delete " + number + " successfully!");
         } else {
             return ResponseEntity
                     .badRequest()

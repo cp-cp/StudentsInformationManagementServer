@@ -47,7 +47,7 @@ public class StudentService {
         {
             return ResponseEntity
                     .badRequest()
-                    .body("Error: The teacher has been existed!");
+                    .body("Error: The student has been existed!");
         }
         else {
             Student student1=new Student();
@@ -57,7 +57,7 @@ public class StudentService {
             student1.setName(student.getName());
             student1.setScore(student.getScore());
             studentRepository.save(student1);
-            return ResponseEntity.ok("success");
+            return ResponseEntity.ok("Success!");
         }
     }
 
@@ -65,7 +65,7 @@ public class StudentService {
         if (studentRepository.existsByNumber(number)) {
             studentRepository.deleteByNumber(number);
             return ResponseEntity
-                    .badRequest()
+                    .ok()
                     .body("Delete " + number + " successfully!");
         } else {
             return ResponseEntity.ok("Unable to find this id.");
