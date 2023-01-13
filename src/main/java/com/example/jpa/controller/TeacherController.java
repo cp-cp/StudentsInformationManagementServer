@@ -74,7 +74,7 @@ public class TeacherController {
     }
 
     //删除
-    @DeleteMapping("/deleteById/{id}")
+    @DeleteMapping("/deleteByNumber/{id}")
     ResponseEntity delete(@PathVariable String number) {
         return teacherService.delete(number);
     }
