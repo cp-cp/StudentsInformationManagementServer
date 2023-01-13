@@ -7,7 +7,6 @@ import com.example.jpa.request.LoginRequest;
 import com.example.jpa.request.ModifyStudentRequest;
 import com.example.jpa.request.ModifyUserRequest;
 import com.example.jpa.request.RegisterRequest;
-import com.example.jpa.requests.QueryUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

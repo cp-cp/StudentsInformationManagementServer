@@ -1,12 +1,12 @@
-package com.example.jpa.requests;
+package com.example.jpa.request;
 
-public class InsertCourseRequest {
+public class ModifyCourseRequest {
     String username;
     String name;
     String number;
     int credit;
 
-    public InsertCourseRequest(String username, String name, String number, int credit) {
+    public ModifyCourseRequest(String username, String name, String number, int credit) {
         this.username = username;
         this.name = name;
         this.number = number;

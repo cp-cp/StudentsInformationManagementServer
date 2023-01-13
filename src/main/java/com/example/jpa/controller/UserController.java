@@ -8,7 +8,6 @@ import com.example.jpa.request.LoginRequest;
 import com.example.jpa.request.ModifyStudentRequest;
 import com.example.jpa.request.ModifyUserRequest;
 import com.example.jpa.request.RegisterRequest;
-import com.example.jpa.requests.QueryUserRequest;
 import com.example.jpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,9 +45,9 @@ public class UserController {
         return userRepository.findAll(pageable);
     }
 
-    @GetMapping("/getByUsername/{queryUserRequest}")
-    Optional<User> getByUsername(@PathVariable("queryUserRequest") QueryUserRequest queryUserRequest) {
-            return userService.getByUsername(queryUserRequest.getUsername());
+    @GetMapping("/getByUsername/{username}")
+    Optional<User> getByUsername(@PathVariable String username) {
+            return userService.getByUsername(username);
     }
 
     @PostMapping("/modify")

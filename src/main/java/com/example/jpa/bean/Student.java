@@ -22,5 +22,4 @@ public class Student implements Serializable {
     String name;
     String gender;
     String college;
-    int score;
 }

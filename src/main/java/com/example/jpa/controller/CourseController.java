@@ -1,13 +1,10 @@
 package com.example.jpa.controller;
 
 import com.example.jpa.bean.Course;
-import com.example.jpa.bean.Student;
 import com.example.jpa.dao.CourseRepository;
 import com.example.jpa.dao.TeacherRepository;
-import com.example.jpa.request.InsertStudentRequest;
-import com.example.jpa.request.ModifyUserRequest;
-import com.example.jpa.requests.InsertCourseRequest;
-import com.example.jpa.requests.ModifyCourseRequest;
+import com.example.jpa.request.InsertCourseRequest;
+import com.example.jpa.request.ModifyCourseRequest;
 import com.example.jpa.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +35,7 @@ public class CourseController {
     List<Course> findAll() { return courseService.findAll(); }
 
     @GetMapping("/getById")
-    Optional<Course> findById(@RequestBody int id) {
+    Optional<Course> getById(@RequestBody int id) {
         return courseService.getById(id);
     }
 
@@ -57,7 +54,7 @@ public class CourseController {
         return courseService.deleteByTeacherNumber(number);
     }
 
-    @GetMapping(value = "course/page/{pageNo}")
+    @GetMapping(value = "/course/page/{pageNo}")
     public Page<Course> getStudentWithPage(@PathVariable int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
         return courseRepository.findAll(pageable);

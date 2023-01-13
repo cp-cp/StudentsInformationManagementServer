@@ -1,6 +1,7 @@
 package com.example.jpa.service;
 
 import com.example.jpa.bean.Student;
+import com.example.jpa.dao.ScoreRepository;
 import com.example.jpa.dao.StudentRepository;
 import com.example.jpa.request.InsertStudentRequest;
 import com.example.jpa.request.ModifyStudentRequest;
@@ -16,6 +17,8 @@ import java.util.Random;
 public class StudentService {
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     public String init() {
         String[] name = {"John", "Jane", "Mark", "Mia", "David", "Emily", "Michael", "Sarah", "Peter", "Elizabeth"};
@@ -55,7 +58,6 @@ public class StudentService {
             student1.setCollege(student.getCollege());
             student1.setNumber(student.getNumber());
             student1.setName(student.getName());
-            student1.setScore(student.getScore());
             studentRepository.save(student1);
             return ResponseEntity.ok("Success!");
         }
@@ -63,6 +65,7 @@ public class StudentService {
 
     public ResponseEntity delete(String number) {
         if (studentRepository.existsByNumber(number)) {
+            scoreRepository.deleteByStudentNumber(number);
             studentRepository.deleteByNumber(number);
             return ResponseEntity
                     .ok()
@@ -81,7 +84,6 @@ public class StudentService {
         if(studentRepository.existsByNumber(studentRequest.getNumber()))
         {
             Student student=studentRepository.findByNumber(studentRequest.getNumber()).get();
-            student.setScore(studentRequest.getScore());
             student.setGender(studentRequest.getGender());
             student.setCollege(studentRequest.getCollege());
             student.setNumber(studentRequest.getNumber());

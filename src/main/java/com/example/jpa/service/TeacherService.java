@@ -1,9 +1,11 @@
 package com.example.jpa.service;
 
 import com.example.jpa.bean.Course;
+import com.example.jpa.bean.Score;
 import com.example.jpa.bean.Student;
 import com.example.jpa.bean.Teacher;
 import com.example.jpa.dao.CourseRepository;
+import com.example.jpa.dao.ScoreRepository;
 import com.example.jpa.dao.StudentRepository;
 import com.example.jpa.dao.TeacherRepository;
 import com.example.jpa.request.InsertTeacherRequest;
@@ -11,12 +13,14 @@ import com.example.jpa.request.ModifyTeacherRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 @Service
+@Transactional
 public class TeacherService {
     @Autowired
     TeacherRepository teacherRepository;
@@ -25,6 +29,8 @@ public class TeacherService {
     CourseRepository courseRepository;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     public String init() {
         Random random=new Random();
@@ -73,8 +79,15 @@ public class TeacherService {
 
     public ResponseEntity delete(String number) {
         if (teacherRepository.existsByNumber(number)) {
+            List<Score> scores = scoreRepository.findByCourseTeacherNumber(number,null);
+            for (Score score : scores) {
+                Course course=score.getCourse();
+                course.setTeacher(null);
+                score.setCourse(course);
+                scoreRepository.save(score);
+            }
+//            courseRepository.deleteByTeacherNumber(number);
             teacherRepository.deleteByNumber(number);
-            courseRepository.deleteByTeacherNumber(number);
             return ResponseEntity.ok().body("Delete " + number + " successfully!");
         } else {
             return ResponseEntity
