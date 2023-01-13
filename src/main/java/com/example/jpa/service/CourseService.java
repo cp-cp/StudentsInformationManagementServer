@@ -3,10 +3,13 @@ package com.example.jpa.service;
 import com.example.jpa.bean.Course;
 import com.example.jpa.bean.Student;
 import com.example.jpa.bean.Teacher;
+import com.example.jpa.bean.User;
 import com.example.jpa.dao.CourseRepository;
 import com.example.jpa.dao.TeacherRepository;
 import com.example.jpa.request.InsertStudentRequest;
+import com.example.jpa.request.ModifyUserRequest;
 import com.example.jpa.requests.InsertCourseRequest;
+import com.example.jpa.requests.ModifyCourseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -81,6 +84,21 @@ public class CourseService {
             return ResponseEntity
                     .badRequest()
                     .body("Error: No match!");
+        }
+    }
+
+    public ResponseEntity modify(ModifyCourseRequest courseRequest) {
+        if (courseRepository.existsByNumber(courseRequest.getNumber())) {
+            Course course = courseRepository.findByNumber(courseRequest.getNumber()).get();
+            course.setCredit(courseRequest.getCredit());
+            course.setName(courseRequest.getName());
+            course.setNumber(courseRequest.getNumber());
+            courseRepository.save(course);
+            return ResponseEntity.ok("Success");
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error:  No student match the username");
         }
     }
 }

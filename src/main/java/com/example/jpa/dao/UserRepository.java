@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     boolean existsByUsername(String username);
     Optional<User> findByUsername(String username);
-
+    Optional<User> getByUsername(String username);
     Page<User> findAll(Pageable pageable);
 }

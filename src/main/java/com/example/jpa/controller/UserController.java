@@ -1,10 +1,14 @@
 package com.example.jpa.controller;
 
 
+import com.example.jpa.bean.Student;
 import com.example.jpa.bean.Teacher;
 import com.example.jpa.dao.UserRepository;
 import com.example.jpa.request.LoginRequest;
+import com.example.jpa.request.ModifyStudentRequest;
+import com.example.jpa.request.ModifyUserRequest;
 import com.example.jpa.request.RegisterRequest;
+import com.example.jpa.requests.QueryUserRequest;
 import com.example.jpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +20,7 @@ import com.example.jpa.bean.User;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController//控制返回的格式，写入Http响应头
 @RequestMapping("/users")
@@ -39,5 +44,15 @@ public class UserController {
     public Page<User> getStudentWithPage(@PathVariable int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
         return userRepository.findAll(pageable);
+    }
+
+    @GetMapping("/getByUsername/{queryUserRequest}")
+    Optional<User> getByUsername(@PathVariable("queryUserRequest") QueryUserRequest queryUserRequest) {
+            return userService.getByUsername(queryUserRequest.getUsername());
+    }
+
+    @PostMapping("/modify")
+    ResponseEntity modify(@RequestBody ModifyUserRequest userRequest)  {
+        return userService.modify(userRequest);
     }
 }

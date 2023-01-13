@@ -1,9 +1,13 @@
 package com.example.jpa.service;
 
+import com.example.jpa.bean.Student;
 import com.example.jpa.bean.User;
 import com.example.jpa.dao.UserRepository;
 import com.example.jpa.request.LoginRequest;
+import com.example.jpa.request.ModifyStudentRequest;
+import com.example.jpa.request.ModifyUserRequest;
 import com.example.jpa.request.RegisterRequest;
+import com.example.jpa.requests.QueryUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -51,5 +55,23 @@ public class UserService {
 
         return ResponseEntity
                 .ok("Register successfully!");
+    }
+
+    public Optional<User> getByUsername(String username) {
+        return userRepository.getByUsername(username);
+    }
+
+    public ResponseEntity modify(ModifyUserRequest userRequest) {
+        if (userRepository.existsByUsername(userRequest.getUsername())) {
+            User user = userRepository.findByUsername(userRequest.getUsername()).get();
+            user.setPassword(userRequest.getPassword());
+            user.setEmail(userRequest.getEmail());
+            userRepository.save(user);
+            return ResponseEntity.ok("Success");
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error:  No student match the username");
+        }
     }
 }

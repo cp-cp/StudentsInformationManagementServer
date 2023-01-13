@@ -4,11 +4,16 @@ import com.example.jpa.bean.Course;
 import com.example.jpa.bean.Student;
 import com.example.jpa.dao.CourseRepository;
 import com.example.jpa.dao.TeacherRepository;
+import com.example.jpa.request.InsertStudentRequest;
+import com.example.jpa.request.ModifyUserRequest;
+import com.example.jpa.requests.InsertCourseRequest;
+import com.example.jpa.requests.ModifyCourseRequest;
 import com.example.jpa.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,5 +61,20 @@ public class CourseController {
     public Page<Course> getStudentWithPage(@PathVariable int pageNo) {
         Pageable pageable = PageRequest.of(pageNo, PAGE_SIZE); // PAGE_SIZE 控制每一页最多的学生数量
         return courseRepository.findAll(pageable);
+    }
+
+    @DeleteMapping("/deleteByNumber/{id}")
+    ResponseEntity delete(@PathVariable String number) {
+        return courseService.delete(number);
+    }
+
+    @PostMapping("/add")
+    ResponseEntity add(@RequestBody InsertCourseRequest course) {
+        return courseService.add(course);
+    }
+
+    @PostMapping("/modify")
+    ResponseEntity modify(@RequestBody ModifyCourseRequest courseRequest)  {
+        return courseService.modify(courseRequest);
     }
 }
