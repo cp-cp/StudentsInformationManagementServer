@@ -124,4 +124,8 @@ public class TeacherService {
                     .body("Error: No teacher match the number!");
         }
     }
+
+    public Optional<Teacher> findByNumber(String number) {
+        return teacherRepository.findByNumber(number);
+    }
 }

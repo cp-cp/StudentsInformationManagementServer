@@ -26,4 +26,6 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
     boolean existsByNumber(String Number);
     long deleteByNumber(String number);
     Optional<Course> findByNumber(String number);
+
+    List<Course> findByTeacherNumber(String teacherNumber);
 }

@@ -39,9 +39,9 @@ public class CourseController {
         return courseService.getById(id);
     }
 
-    @PostMapping("/findByTeacherId")
-    List<Course> findByTeacherId(@RequestBody int teacherId) {
-        return courseService.findByTeacherId(teacherId);
+    @GetMapping("/findByTeacherNumber/{teacherNumber}")
+    List<Course> findByTeacherNumber(@PathVariable String teacherNumber) {
+        return courseService.findByTeacherNumber(teacherNumber);
     }
 
     @PostMapping("/findByCredit")
@@ -60,7 +60,7 @@ public class CourseController {
         return courseRepository.findAll(pageable);
     }
 
-    @DeleteMapping("/deleteByNumber/{id}")
+    @DeleteMapping("/deleteByNumber/{number}")
     ResponseEntity delete(@PathVariable String number) {
         return courseService.delete(number);
     }

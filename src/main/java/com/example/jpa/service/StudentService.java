@@ -98,4 +98,8 @@ public class StudentService {
                     .body("Error:  No student match the number");
         }
     }
+
+    public Optional<Student> findByNumber(String number) {
+        return studentRepository.findByNumber(number);
+    }
 }

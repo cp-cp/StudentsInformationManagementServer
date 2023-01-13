@@ -46,7 +46,8 @@ public class StudentController {
     Optional<Student> getById(@PathVariable("id") int id) {
         return studentService.getById(id);
     }
-
+    @GetMapping("/findByNumber/{number}")
+    Optional<Student> findByNumber(@PathVariable String number){return studentService.findByNumber(number);}
     //增添
     @PostMapping("/add")
     ResponseEntity add(@RequestBody InsertStudentRequest student) {

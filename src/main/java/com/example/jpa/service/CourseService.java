@@ -44,8 +44,8 @@ public class CourseService {
         return courseRepository.findById(id);
     }
 
-    public List<Course> findByTeacherId(int teacherId) {
-        return courseRepository.findByTeacherId(teacherId);
+    public List<Course> findByTeacherNumber(String teacherNumber) {
+        return courseRepository.findByTeacherNumber(teacherNumber);
     }
 
     public List<Course> findByCredit(int credit) {

@@ -55,7 +55,8 @@ public class TeacherController {
     List<Course> findByIdAllCourses(@RequestBody int id) {
         return teacherService.AllCourses(id);
     }
-
+    @GetMapping("/findByNumber/{number}")
+    Optional<Teacher> findByNumber(@PathVariable String number){return teacherService.findByNumber(number);}
     @GetMapping("/getByIdAllCourses/{id}")
     List<String> getByIdAllCourses(@PathVariable("id") int id) {
         List<Course> courses = teacherService.AllCourses(id);
