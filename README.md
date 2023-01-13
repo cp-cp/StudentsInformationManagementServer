@@ -1,5 +1,10 @@
 # Student_Arrangement
 server of student arrangement system
+
+Front-end by **Coca Cat**,**lyuzlion**
+
+back-end by **cp-cp** ,**Miraclys**
+
 ## Framework
 Springboot
 ## Connection
