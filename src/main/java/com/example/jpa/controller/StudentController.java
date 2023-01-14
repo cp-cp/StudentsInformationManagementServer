@@ -36,16 +36,6 @@ public class StudentController {
         return studentService.findAll();
     }
 
-    //按照Id查询,一种是Post方法一种是Get方法
-    @PostMapping("/findById")
-    Optional<Student> findById(@RequestBody int id) {
-        return studentService.findById(id);
-    }
-
-    @GetMapping("/getById/{id}")
-    Optional<Student> getById(@PathVariable("id") int id) {
-        return studentService.getById(id);
-    }
     @GetMapping("/findByNumber/{number}")
     Optional<Student> findByNumber(@PathVariable String number){return studentService.findByNumber(number);}
     //增添

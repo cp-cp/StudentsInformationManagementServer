@@ -40,26 +40,11 @@ public class TeacherController {
         return teacherService.findAll();
     }
 
-    //按照Id查询,一种是Post方法一种是Get方法
-    @PostMapping("/findById")
-    Optional<Teacher> findById(@RequestBody int id) {
-        return teacherService.findById(id);
-    }
-
-    @GetMapping("/getById/{id}")
-    Optional<Teacher> getById(@PathVariable("id") int id) {
-        return teacherService.getById(id);
-    }
-
-    @PostMapping("/findByIdAllCourses")
-    List<Course> findByIdAllCourses(@RequestBody int id) {
-        return teacherService.AllCourses(id);
-    }
     @GetMapping("/findByNumber/{number}")
     Optional<Teacher> findByNumber(@PathVariable String number){return teacherService.findByNumber(number);}
-    @GetMapping("/getByIdAllCourses/{id}")
-    List<String> getByIdAllCourses(@PathVariable("id") int id) {
-        List<Course> courses = teacherService.AllCourses(id);
+    @GetMapping("/findByNumberAllCourses/{number}")
+    List<String> findByNumberAllCourses(@PathVariable String number) {
+        List<Course> courses = teacherService.AllCourses(number);
         List<String> list = new ArrayList<>();
         for (Course course : courses) {
             list.add(course.getName());

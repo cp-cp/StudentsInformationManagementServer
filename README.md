@@ -32,9 +32,7 @@ http://localhost:8080
 |--------------------------|------------------|----------|--------------------------|
 | /init                    | 生成学生样例           | GET方法    | String "initialize students successfully!" |
 | /all                     | 查询所有学生           | GET方法 | List<Student>                              |
-| /findByld                | 按照id索引           | POST方法   | Student |
 |/findByNumber/{number}| 按照number索引       | GET方法    | Student |
-| /getByld/{id)            | 按照id索引           | GET方法    | Student |
 | /add                     | 添加学生             | POST方法   | ResponseEntity |
 | /deleteByNumber/{number} | 按照number(学号)删除学生 | DELETE方法 | ResponseEntity |
 | modify                   | 更新学生             | POST方法   | ResponseEntity |
@@ -54,18 +52,15 @@ http://localhost:8080
 
 #### http
 
-| route                    | action                 | method     | response                                   |
-| ------------------------ | ---------------------- | ---------- | ------------------------------------------ |
-| /init                    | 生成teacher样例        | GET方法    | String "initialize teachers successfully!" |
-| /all                     | 查询所有老师           | GET方法    | List<Teacher>                              |
-| /findById                | 按照id索引             | POST方法   | Teacher                                    |
-| /getById/ (id}           | 按照id索引             | GET方法    | Teacher                                    |
-| /findByNumber/{number}   | 按照number索引         | GET方法    | Teacher                                    |
-| /findByIdAllCourses      | 查询这个老师所有的授课 | POST方法   | List<Course>                               |
-| /getByIdAllCourses/{id}  | 查询这个老师所有的授课 | GET方法    | List<String>                               |
-| /add                     | 添加老师               | POST方法   | ResponseEntity                             |
-| /deleteByNumber/{number} | 按照number删除老师     | DELETE方法 | ResponseEntity                             |
-| /modify                  | 修改老师               | POST方法   | ResponseEntity                             |
+| route                           | action                 | method     | response                                   |
+|---------------------------------| ---------------------- | ---------- | ------------------------------------------ |
+| /init                           | 生成teacher样例        | GET方法    | String "initialize teachers successfully!" |
+| /all                            | 查询所有老师           | GET方法    | List<Teacher>                              |
+| /findByNumber/{number}          | 按照number索引         | GET方法    | Teacher                                    |
+| /findByNumberAllCourses/{number} | 查询这个老师所有的授课 | GET方法    | List<String>                               |
+| /add                            | 添加老师               | POST方法   | ResponseEntity                             |
+| /deleteByNumber/{number}        | 按照number删除老师     | DELETE方法 | ResponseEntity                             |
+| /modify                         | 修改老师               | POST方法   | ResponseEntity                             |
 
 
 ### Course

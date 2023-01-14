@@ -41,10 +41,6 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getById(int id) {
-        return studentRepository.findById(id);
-    }
-
     public ResponseEntity add(InsertStudentRequest student) {
         if (studentRepository.existsByNumber(student.getNumber()))
         {
@@ -73,10 +69,6 @@ public class StudentService {
         } else {
             return ResponseEntity.ok("Unable to find this id.");
         }
-    }
-
-    public Optional<Student> findById(int id) {
-        return studentRepository.findById(id);
     }
 
     public ResponseEntity modify(ModifyStudentRequest studentRequest)

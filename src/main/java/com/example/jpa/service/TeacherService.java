@@ -54,10 +54,6 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public Optional<Teacher> findById(int id) {
-        return teacherRepository.findById(id);
-    }
-
     public ResponseEntity add(InsertTeacherRequest teacherRequest) {
         if(teacherRepository.existsByNumber(teacherRequest.getNumber()))
         {
@@ -94,12 +90,8 @@ public class TeacherService {
         }
     }
 
-    public Optional<Teacher> getById(int id) {
-        return teacherRepository.findById(id);
-    }
-
-    public List<Course> AllCourses(int id) {
-        List<Course> courses = courseRepository.findByTeacherId(id);
+    public List<Course> AllCourses(String number) {
+        List<Course> courses = courseRepository.findByTeacherNumber(number);
         return courses;
     }
 
