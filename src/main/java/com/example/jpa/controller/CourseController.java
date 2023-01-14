@@ -48,7 +48,10 @@ public class CourseController {
     List<Course> findByCredit(@RequestBody int credit) {
         return courseService.findByCredit(credit);
     }
-
+    @PostMapping("/findByNumber")
+    Optional<Course> findByNumber(@RequestBody String courseNumber) {
+        return courseService.findByNumber(courseNumber);
+    }
     @DeleteMapping("/deleteByTeacherNumber/{number}")
     String deleteByTeacherNumber(@PathVariable String number) {
         return courseService.deleteByTeacherNumber(number);

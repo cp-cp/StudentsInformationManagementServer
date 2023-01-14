@@ -44,7 +44,9 @@ public class CourseService {
     public Optional<Course> getById(int id) {
         return courseRepository.findById(id);
     }
-
+    public Optional<Course> findByNumber(String courseNumber) {
+        return courseRepository.findByNumber(courseNumber);
+    }
     public List<Course> findByTeacherNumber(String teacherNumber) {
         return courseRepository.findByTeacherNumber(teacherNumber);
     }
