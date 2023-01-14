@@ -21,5 +21,8 @@ public interface ScoreRepository extends JpaRepository<Score,Integer>
     List<Score> findByCourseTeacherNumber(String number,Sort sort);
     Long deleteByStudentNumberAndCourseNumber(String studentNumber, String courseNumber);
 
+    Long deleteByCourseTeacherNumber(String number);
+
     Long deleteByStudentNumber(String studentNumber);
+    Long deleteByCourseNumber(String number);
 }

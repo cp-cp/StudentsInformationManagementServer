@@ -3,6 +3,7 @@ package com.example.jpa.service;
 import com.example.jpa.bean.Course;
 import com.example.jpa.bean.Teacher;
 import com.example.jpa.dao.CourseRepository;
+import com.example.jpa.dao.ScoreRepository;
 import com.example.jpa.dao.TeacherRepository;
 import com.example.jpa.request.InsertCourseRequest;
 import com.example.jpa.request.ModifyCourseRequest;
@@ -20,6 +21,8 @@ public class CourseService {
     TeacherRepository teacherRepository;
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     public String init() {
         String[] name = {"Math", "Physics", "Biology",
@@ -56,6 +59,7 @@ public class CourseService {
     }
 
     public String deleteByTeacherNumber(String number) {
+        scoreRepository.deleteByCourseTeacherNumber(number);
         return "Delete " + courseRepository.deleteByTeacherNumber(number) + " successfully!";
     }
 
@@ -85,6 +89,7 @@ public class CourseService {
     public ResponseEntity delete(String number) {
         if (courseRepository.existsByNumber(number)) {
             courseRepository.deleteByNumber(number);
+            scoreRepository.deleteByCourseNumber(number);
             //courseRepository.deleteByTeacherNumber(number);
             return ResponseEntity.ok().body("Delete " + number + " successfully!");
         } else {
