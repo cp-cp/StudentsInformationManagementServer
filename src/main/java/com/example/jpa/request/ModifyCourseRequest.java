@@ -4,6 +4,7 @@ public class ModifyCourseRequest {
     String username;
     String name;
     String number;
+    String teacherNumber;
     int credit;
 
     public ModifyCourseRequest(String username, String name, String number, int credit) {
@@ -43,5 +44,13 @@ public class ModifyCourseRequest {
 
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+
+    public String getTeacherNumber() {
+        return teacherNumber;
+    }
+
+    public void setTeacherNumber(String teacherNumber) {
+        this.teacherNumber = teacherNumber;
     }
 }

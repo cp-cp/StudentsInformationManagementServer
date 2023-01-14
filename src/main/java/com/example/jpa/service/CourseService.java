@@ -98,8 +98,19 @@ public class CourseService {
             course.setCredit(courseRequest.getCredit());
             course.setName(courseRequest.getName());
             course.setNumber(courseRequest.getNumber());
-            courseRepository.save(course);
-            return ResponseEntity.ok("Success");
+            Optional<Teacher> teacher=teacherRepository.findByNumber(courseRequest.getTeacherNumber());
+            if (teacher.isPresent())
+            {
+                course.setTeacher(teacher.get());
+                courseRepository.save(course);
+                return ResponseEntity.ok("Success");
+            }
+            else
+            {
+                return ResponseEntity
+                        .badRequest()
+                        .body("Error:  the teacher does not exists!");
+            }
         } else {
             return ResponseEntity
                     .badRequest()
