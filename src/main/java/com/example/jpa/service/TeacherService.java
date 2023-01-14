@@ -79,12 +79,10 @@ public class TeacherService {
 
     public ResponseEntity delete(String number) {
         if (teacherRepository.existsByNumber(number)) {
-            List<Score> scores = scoreRepository.findByCourseTeacherNumber(number,null);
-            for (Score score : scores) {
-                Course course=score.getCourse();
+            List<Course> courses = courseRepository.findByTeacherNumber(number);
+            for (Course course : courses) {
                 course.setTeacher(null);
-                score.setCourse(course);
-                scoreRepository.save(score);
+                courseRepository.save(course);
             }
 //            courseRepository.deleteByTeacherNumber(number);
             teacherRepository.deleteByNumber(number);
