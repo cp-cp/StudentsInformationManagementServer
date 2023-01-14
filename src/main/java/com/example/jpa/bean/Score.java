@@ -17,9 +17,9 @@ public class Score {
         int id;
         int score;
         @ManyToOne
-        @JoinColumn(name = "courseNumber")
+        @JoinColumn(name = "courseId")
         private Course course;
         @ManyToOne
-        @JoinColumn(name="studentNumber")
+        @JoinColumn(name="studentId")
         private Student student;
 }
