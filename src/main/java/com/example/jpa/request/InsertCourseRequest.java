@@ -4,12 +4,14 @@ public class InsertCourseRequest {
     String username;
     String name;
     String number;
+    String teacherNumber;
     int credit;
 
-    public InsertCourseRequest(String username, String name, String number, int credit) {
+    public InsertCourseRequest(String username, String name, String number, String teacherNumber ,int credit) {
         this.username = username;
         this.name = name;
         this.number = number;
+        this.teacherNumber=teacherNumber;
         this.credit = credit;
     }
 
@@ -43,5 +45,13 @@ public class InsertCourseRequest {
 
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+
+    public String getTeacherNumber() {
+        return teacherNumber;
+    }
+
+    public void setTeacherNumber(String teacherNumber) {
+        this.teacherNumber = teacherNumber;
     }
 }

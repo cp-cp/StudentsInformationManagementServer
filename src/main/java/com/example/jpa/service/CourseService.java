@@ -1,6 +1,7 @@
 package com.example.jpa.service;
 
 import com.example.jpa.bean.Course;
+import com.example.jpa.bean.Teacher;
 import com.example.jpa.dao.CourseRepository;
 import com.example.jpa.dao.TeacherRepository;
 import com.example.jpa.request.InsertCourseRequest;
@@ -66,7 +67,16 @@ public class CourseService {
             course1.setName(course.getName());
             course1.setCredit(course.getCredit());
             course1.setNumber(course.getNumber());
-            return ResponseEntity.ok("Success!");
+            Optional<Teacher> teacher=teacherRepository.findByNumber(course.getTeacherNumber());
+            if(teacher.isPresent())
+            {
+                course1.setTeacher(teacher.get());
+                return ResponseEntity.ok("Success!");
+            }
+            else
+            {
+                return ResponseEntity.badRequest().body("Teacher does not exists!");
+            }
         }
     }
 
